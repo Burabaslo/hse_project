@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> HSE Project</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<h1 align="center" style="color:#0099ff"> Enter your word </h1>
+
+<style>
+  body {
+    background-image: url('cube.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+
+<body>
+  <!--<script src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <input class="div-input" /> -->
+
+
+  <div class="center">
+    <p>
+      <input id="input-name" oninput="outputname.value = this.value">
+    </p>
+    <p>
+      <button class="btn" type="submit">Go</button>
+    </p>
+  </div>
+  <p class="center">
+    <output id="outputname" name="outputname" for="input-name"></output>
+  </p>
+  <a class="content_toggle" href="#">Show prefix fucntion algo</a>
+  <a class="content_toggle_2" href="#">Show KMP algo</a>
+  <div class="content_block" style="display: none;">
+  <pre>
+
+    vector<int> prefix_function(string s) {
+    int n = (int)s.length();
+    vector<int> pi(n);
+    for (int i = 0; i < n; i++)
+        for (int k = 0; k <= i; k++)
+            if (s.substr(0, k) == s.substr(i-k+1, k))
+                pi[i] = k;
+    return pi;
+    }
+  </pre>
+  </div>
+
+  <div class="content_block_2" style="display: none;">
+    <pre>
+    size_type KMP(const string& S, int begin, const string& pattern) {
+    	vector<int> pf(pattern.length());
+    	pf[0] = 0;
+    	for (int k = 0, i = 1; i < pattern.length(); ++i) {
+    		while ((k > 0) && (pattern[i] != pattern[k]))
+    			k = pf[k - 1];
+    		if (pattern[i] == pattern[k])
+    			k++;
+    		pf[i] = k;
+    	}
+    	for (int k = 0, i = begin; i < S.length(); ++i) {
+    		while ((k > 0) && (pattern[k] != S[i]))
+    			k = pf[k - 1];
+    		if (pattern[k] == S[i])cout << k <<"\t" << i+1 << "\t";
+    			k++;
+    		if (k == pattern.length())
+    			return (i - pattern.length() + 1);
+    	}
+    	return (npos);
+    	cout << npos;
+    }
+  </pre>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+    	$('.content_toggle').click(function(){
+    		$('.content_block').slideToggle(300);
+    		return false;
+    	});
+      $('.content_toggle_2').click(function(){
+    		$('.content_block_2').slideToggle(0);
+    		return false;
+    	});
+    });
+
+  </script>
+</body>
+</html>
